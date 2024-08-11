@@ -187,7 +187,7 @@ fn collect<T>(ids: &Vec<usize>, entries: &Vec<MenuEntry<T>>, property_names: &Ve
             .map(|id| {
                 let entry = entries.get(id).unwrap();
                 Value::new((
-                    id as u32,
+                    id as i32,
                     entry.get_properties(property_names),
                     collect(&entry.children, entries, property_names, depth - 1)
                 ))
