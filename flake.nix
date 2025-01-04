@@ -7,6 +7,11 @@
       (system:
         let
           pkgs = import nixpkgs { inherit system; };
+          libPath = with pkgs; lib.makeLibraryPath [
+            libGL
+            libxkbcommon
+            wayland
+          ];
         in
         with pkgs;
         {
@@ -23,6 +28,7 @@
               ];
 
               RUST_SRC_PATH = "${rust.packages.stable.rustPlatform.rustLibSrc}";
+              LD_LIBRARY_PATH = libPath;
 
               shellHook = ''
                 exec fish
